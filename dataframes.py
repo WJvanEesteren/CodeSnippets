@@ -23,3 +23,6 @@ with open('listfile.txt', 'w') as filehandle:
         filehandle.write('%s,\n' % typ)
 
 print("Athena template file created")
+
+# 4 conditional selecting of collumn values based upon loc
+res = actuals.loc[actuals['date'] >= '2020-01-01', ['date','Sales']]
