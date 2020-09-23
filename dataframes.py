@@ -41,3 +41,18 @@ print(pd.to_datetime(df.date, dayfirst=True).dt.strftime('%Y-%m-%d'))
 # 7 indexing values in pandas df (interestingly it seems loc uses row then column for this stuff)
 index = action_impact_result['actual sales'].last_valid_index()
 value = action_impact_result.loc[index,['actual sales']].values[0]
+
+# 8 filtering date values
+## FY Example
+
+## FY 20
+df.loc[df['month_year'] < '2020-07', 'fiscal year'] = 'FY 20'
+
+## FY 21
+df.loc[((df['month_year'] > '2020-06') & (df['month_year'] < '2021-07')), 'fiscal year'] = 'FY 21'
+
+## Masks
+start = df['month_year'] > '2020-06'
+end = df['month_year'] <= '2021-06'
+between = start & end
+df.loc[between]['fiscal year'] = 'FY 21'
