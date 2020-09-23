@@ -26,3 +26,14 @@ print("Athena template file created")
 
 # 4 conditional selecting of collumn values based upon loc
 res = actuals.loc[actuals['date'] >= '2020-01-01', ['date','Sales']]
+
+# 5 conditional filter out column value based on date
+
+df.loc[df['date'] < '01-12-2021', 'sales base upper'] = None
+
+#May require the following step to add a month year column in between
+df['month_year'] = pd.to_datetime(df['date']).dt.to_period('M')
+df.loc[df['month_year'] < '2021-12', 'sales base upper'] = None
+
+# 6 change format of df date column & ensure date comes first in the result
+print(pd.to_datetime(df.date, dayfirst=True).dt.strftime('%Y-%m-%d'))
