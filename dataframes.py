@@ -51,8 +51,21 @@ df.loc[df['month_year'] < '2020-07', 'fiscal year'] = 'FY 20'
 ## FY 21
 df.loc[((df['month_year'] > '2020-06') & (df['month_year'] < '2021-07')), 'fiscal year'] = 'FY 21'
 
-## Masks
+##  Masks
 start = df['month_year'] > '2020-06'
 end = df['month_year'] <= '2021-06'
 between = start & end
 df.loc[between]['fiscal year'] = 'FY 21'
+
+# 9 using .apply() to multiply many columns by a value e.g. by -1
+
+cols = ['sales base upper', 'sales base middle', 'costs base middle', 'capex base middle', 'capex base upper', \
+        'costs base upper', 'sales base lower', 'capex base lower', 'costs base lower', 'ebitda base lower' \
+        ,'fcf base lower', 'ebitda base upper', 'fcf base middle', 'roi base middle', 'ebitda base middle', 'fcf base upper' \
+        , 'roi base upper', 'roi base lower', 'sales impact lower', 'costs impact lower', 'capex impact lower', 'ebitda impact lower'
+        , 'fcf impact lower', 'roi impact lower', 'sales impact middle', 'costs impact middle', 'capex impact middle', 'ebitda impact middle'
+        , 'fcf impact middle', 'roi impact middle', 'sales impact upper', 'costs impact upper', 'capex impact upper', 'ebitda impact upper'
+        , 'fcf impact upper', 'roi impact upper']
+
+
+df_sub[cols] = df_sub[cols].apply(lambda x: x* -1)
