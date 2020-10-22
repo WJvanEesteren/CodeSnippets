@@ -69,3 +69,14 @@ cols = ['sales base upper', 'sales base middle', 'costs base middle', 'capex bas
 
 
 df_sub[cols] = df_sub[cols].apply(lambda x: x* -1)
+
+# 10 Merge df using list of inputs
+########## 2. Combine and merge data ##########
+list_simulation = [cc_simulation_low, cc_simulation_high,\
+                    gdp_simulation_low, gdp_simulation_high,\
+                    un_emp_low, un_emp_high,
+                    pur_int_low, pur_int_high]
+    
+
+    #merge simulation data     
+    df_merged = reduce(lambda  left,right: pd.merge(left,right,on=['date'],how='outer'), list_simulation) 
