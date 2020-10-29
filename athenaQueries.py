@@ -1,6 +1,6 @@
 import pandas as pd
 
-csv = pd.read_csv('forecast.csv', sep = ';')
+csv = pd.read_csv('indicator_data.csv', sep = ';')
 
 csv.columns = csv.columns.str.replace(' ','_')
 
