@@ -80,3 +80,9 @@ list_simulation = [cc_simulation_low, cc_simulation_high,\
 
     #merge simulation data     
     df_merged = reduce(lambda  left,right: pd.merge(left,right,on=['date'],how='outer'), list_simulation) 
+
+# Reset the format of a pesky datetime column
+# If the desired format is Y-M-D but column keeps giving Y-D-M then we have to use dt.strftime 
+# We set the string output to read the column in its current format and then reset it with dayfirst
+dfSource['date'] = dfSource["date"].dt.strftime("%Y-%d-%m")
+dfSource['date'] = pd.to_datetime(dfSource['date'], dayfirst=True, infer_datetime_format=False)
